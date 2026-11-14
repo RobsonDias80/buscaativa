@@ -18,10 +18,11 @@
         <div class="container mx-auto flex flex-col md:flex-row justify-between items-center gap-3">
             <h1 class="text-xl font-bold"><i class="fas fa-school mr-2"></i> EEIEF Antônio Albuquerque de Sousa Filho</h1>
             <div class="flex items-center gap-3">
-                <a href="https://github.com/RobsonDias80/buscaativa/blob/main/README.md" target="_blank" rel="noopener noreferrer"
-                   class="inline-flex items-center gap-2 bg-white text-blue-800 font-semibold px-4 py-2 rounded-md shadow-sm hover:bg-blue-100 transition">
-                    <i class="fas fa-book"></i> Manual de Uso
-                </a>
+                <button type="button" id="openManual" aria-haspopup="dialog" aria-controls="manualDialog"
+                    class="inline-flex items-center gap-2 rounded-lg bg-amber-400 px-4 py-2.5 font-bold text-blue-950 shadow-md transition hover:bg-amber-300 focus:outline-none focus:ring-4 focus:ring-amber-200">
+                    <i class="fas fa-circle-question text-lg" aria-hidden="true"></i>
+                    <span>Ajuda / Manual</span>
+                </button>
                 <span class="text-sm font-medium hidden md:inline">Painel de Infrequência Escolar (100% Validado)</span>
             </div>
         </div>
@@ -104,9 +105,52 @@
 
         <footer class="text-center text-gray-500 text-sm mt-8 pb-8">
             <p class="font-medium">Gestão de Infrequência - EEIEF Antônio Albuquerque de Sousa Filho</p>
-            <p class="mt-1">Desenvolvido pelo Prof. Robson Dias | <a href="https://ondasvirtuais.blogspot.com" target="_blank" class="text-blue-600 hover:underline">Ondas Virtuais</a></p>
+            <p class="mt-1">Desenvolvido pelo Prof. Robson Dias | <a href="https://ondasvirtuais.blogspot.com" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">Ondas Virtuais</a></p>
         </footer>
     </main>
+
+    <div id="manualDialog" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-950/60 p-4" role="dialog" aria-modal="true" aria-labelledby="manualTitle">
+        <section class="flex max-h-[90vh] w-full max-w-3xl flex-col overflow-hidden rounded-xl bg-white shadow-2xl">
+            <header class="flex items-center justify-between gap-4 border-b border-gray-200 bg-blue-800 px-5 py-4 text-white">
+                <h2 id="manualTitle" class="text-xl font-bold"><i class="fas fa-book-open mr-2" aria-hidden="true"></i>Manual de Uso: Painel de Infrequência Escolar</h2>
+                <button type="button" id="closeManual" class="rounded-md p-2 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-white" aria-label="Fechar manual">
+                    <i class="fas fa-times text-xl" aria-hidden="true"></i>
+                </button>
+            </header>
+            <div class="overflow-y-auto p-5 text-gray-700">
+                <p class="mb-5">Este guia rápido ajuda professores, coordenadores e gestores a utilizar o painel de monitoramento de faltas.</p>
+
+                <h3 class="mb-2 text-lg font-bold text-gray-900">1. Acessar o painel</h3>
+                <p class="mb-5">Acesse o link do blog compartilhado pela coordenação e clique em <strong>“Painel de Infrequência”</strong> no menu para abrir o monitoramento.</p>
+
+                <h3 class="mb-2 text-lg font-bold text-gray-900">2. Conhecer a tela inicial</h3>
+                <p class="mb-5">Use o menu <strong>Selecione a Turma</strong> para escolher a turma que deseja consultar e o campo <strong>Buscar Estudante</strong> para localizar um aluno pelo nome.</p>
+
+                <h3 class="mb-2 text-lg font-bold text-gray-900">3. Consultar os dados da turma</h3>
+                <p class="mb-5">Após selecionar uma turma, o painel apresenta o total de estudantes, as faltas acumuladas e a média de faltas por aluno, além da lista de estudantes.</p>
+
+                <h3 class="mb-2 text-lg font-bold text-gray-900">4. Entender os níveis de risco</h3>
+                <ul class="mb-5 list-disc space-y-1 pl-6">
+                    <li><strong class="text-green-700">Baixo (verde):</strong> 0 a 10 faltas.</li>
+                    <li><strong class="text-yellow-700">Alerta (amarelo):</strong> 11 a 20 faltas; o aluno precisa de atenção e a família deve ser notificada.</li>
+                    <li><strong class="text-red-700">Crítico (vermelho):</strong> mais de 20 faltas; requer ação imediata da Busca Ativa.</li>
+                </ul>
+
+                <h3 class="mb-2 text-lg font-bold text-gray-900">5. Buscar um aluno</h3>
+                <p class="mb-5">Selecione primeiro a turma e digite o nome do estudante no campo de busca. A tabela será filtrada automaticamente.</p>
+
+                <h3 class="mb-2 text-lg font-bold text-gray-900">Dicas para a equipe</h3>
+                <ul class="mb-5 list-disc space-y-1 pl-6">
+                    <li>Professores: consultem o painel antes das reuniões com as famílias.</li>
+                    <li>Coordenação: verifiquem semanalmente os casos com nível crítico para acionar a Busca Ativa.</li>
+                </ul>
+                <p class="mb-5">Em caso de dúvida sobre o funcionamento do painel, procure a coordenação pedagógica.</p>
+                <a href="README.md" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 font-semibold text-blue-700 underline hover:text-blue-900">
+                    <i class="fas fa-up-right-from-square" aria-hidden="true"></i> Abrir o manual completo
+                </a>
+            </div>
+        </section>
+    </div>
 
     <script>
         let dadosInfrequencia = {};
@@ -120,8 +164,33 @@
         const totalAlunosEl = document.getElementById('totalAlunos');
         const totalFaltasEl = document.getElementById('totalFaltas');
         const mediaFaltasEl = document.getElementById('mediaFaltas');
-
+        const manualDialog = document.getElementById('manualDialog');
+        const openManualButton = document.getElementById('openManual');
+        const closeManualButton = document.getElementById('closeManual');
         let currentTurma = '';
+        let previousFocusedElement = null;
+
+        function abrirManual() {
+            previousFocusedElement = document.activeElement;
+            manualDialog.classList.remove('hidden');
+            manualDialog.classList.add('flex');
+            closeManualButton.focus();
+        }
+
+        function fecharManual() {
+            manualDialog.classList.add('hidden');
+            manualDialog.classList.remove('flex');
+            if (previousFocusedElement) previousFocusedElement.focus();
+        }
+
+        openManualButton.addEventListener('click', abrirManual);
+        closeManualButton.addEventListener('click', fecharManual);
+        manualDialog.addEventListener('click', (event) => {
+            if (event.target === manualDialog) fecharManual();
+        });
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && !manualDialog.classList.contains('hidden')) fecharManual();
+        });
 
         async function carregarDados() {
             try {
@@ -150,14 +219,12 @@
             if (!currentTurma) return;
 
             let alunos = dadosInfrequencia[currentTurma] || [];
-
             if (searchTerm) {
                 const lowerTerm = searchTerm.toLowerCase();
                 alunos = alunos.filter(a => a.nome.toLowerCase().includes(lowerTerm));
             }
 
             alunosTableBody.innerHTML = '';
-
             if (alunos.length === 0) {
                 noResults.classList.remove('hidden');
                 document.querySelector('table').classList.add('hidden');
@@ -168,7 +235,6 @@
                 alunos.forEach((aluno, index) => {
                     const tr = document.createElement('tr');
                     tr.className = 'hover:bg-blue-50 transition-colors duration-150';
-
                     let riscoBadge = '';
                     let faltasClass = 'font-bold text-lg ';
 
@@ -196,12 +262,10 @@
 
         function updateStats() {
             if (!currentTurma) return;
-
             const alunos = dadosInfrequencia[currentTurma] || [];
             const totalAlunos = alunos.length;
             const totalFaltas = alunos.reduce((sum, a) => sum + a.faltas, 0);
             const media = totalAlunos > 0 ? (totalFaltas / totalAlunos).toFixed(1) : 0;
-
             totalAlunosEl.textContent = totalAlunos;
             totalFaltasEl.textContent = totalFaltas;
             mediaFaltasEl.textContent = media;
@@ -210,7 +274,6 @@
         turmaSelect.addEventListener('change', (e) => {
             currentTurma = e.target.value;
             searchInput.value = '';
-
             if (currentTurma) {
                 placeholderState.classList.add('hidden');
                 tableContainer.classList.remove('hidden');
@@ -225,9 +288,7 @@
         });
 
         searchInput.addEventListener('input', (e) => {
-            if (currentTurma) {
-                renderTable(e.target.value);
-            }
+            if (currentTurma) renderTable(e.target.value);
         });
 
         carregarDados();
