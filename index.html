@@ -7,15 +7,12 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
     <style>
-        body {
-            background-color: #f3f4f6;
-            font-family: 'Inter', sans-serif;
-        }
+        body { background-color: #f3f4f6; font-family: 'Inter', sans-serif; }
     </style>
 </head>
 <body class="bg-gray-50 min-h-screen">
-    <nav class="bg-blue-800 text-white p-4 shadow-md">
-        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center gap-3">
+    <nav class="bg-blue-800 p-4 text-white shadow-md">
+        <div class="container mx-auto flex flex-col items-center justify-between gap-3 md:flex-row">
             <h1 class="text-xl font-bold"><i class="fas fa-school mr-2"></i> EEIEF Antônio Albuquerque de Sousa Filho</h1>
             <div class="flex items-center gap-3">
                 <button type="button" id="openManual" aria-haspopup="dialog" aria-controls="manualDialog"
@@ -23,87 +20,68 @@
                     <i class="fas fa-circle-question text-lg" aria-hidden="true"></i>
                     <span>Ajuda / Manual</span>
                 </button>
-                <span class="text-sm font-medium hidden md:inline">Painel de Infrequência Escolar (100% Validado)</span>
+                <span class="hidden text-sm font-medium md:inline">Painel de Infrequência Escolar (100% Validado)</span>
             </div>
         </div>
     </nav>
 
     <main class="container mx-auto p-4 lg:p-8">
-        <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
-            <h2 class="text-2xl font-bold text-gray-800 mb-2">Monitoramento de Faltas por Turma</h2>
-            <p class="text-gray-600 mb-6">Dados 100% filtrados, limpos e validados diretamente do diário de chamadas. Selecione a turma abaixo:</p>
+        <div class="mb-6 rounded-lg bg-white p-6 shadow-sm">
+            <h2 class="mb-2 text-2xl font-bold text-gray-800">Monitoramento de Faltas por Turma</h2>
+            <p class="mb-6 text-gray-600">Dados 100% filtrados, limpos e validados diretamente do diário de chamadas. Selecione a turma abaixo:</p>
 
-            <div class="flex flex-col md:flex-row gap-4 mb-6 items-center bg-gray-50 p-4 rounded-lg border border-gray-200">
+            <div class="mb-6 flex flex-col items-center gap-4 rounded-lg border border-gray-200 bg-gray-50 p-4 md:flex-row">
                 <div class="w-full md:w-1/3">
-                    <label for="turmaSelect" class="block text-sm font-bold text-gray-700 mb-1"><i class="fas fa-filter mr-1"></i> Selecione a Turma</label>
-                    <select id="turmaSelect" class="w-full border border-gray-300 rounded-md p-2.5 focus:ring-blue-500 focus:border-blue-500 font-medium text-gray-700 shadow-sm cursor-pointer">
+                    <label for="turmaSelect" class="mb-1 block text-sm font-bold text-gray-700"><i class="fas fa-filter mr-1"></i> Selecione a Turma</label>
+                    <select id="turmaSelect" class="w-full cursor-pointer rounded-md border border-gray-300 p-2.5 font-medium text-gray-700 shadow-sm focus:border-blue-500 focus:ring-blue-500">
                         <option value="">-- Escolha uma turma --</option>
                     </select>
                 </div>
-
                 <div class="w-full md:w-2/3">
-                    <label for="searchInput" class="block text-sm font-bold text-gray-700 mb-1"><i class="fas fa-search mr-1"></i> Buscar Estudante</label>
+                    <label for="searchInput" class="mb-1 block text-sm font-bold text-gray-700"><i class="fas fa-search mr-1"></i> Buscar Estudante</label>
                     <div class="relative">
-                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                            <i class="fas fa-search text-gray-400"></i>
-                        </div>
-                        <input type="text" id="searchInput" class="block w-full pl-10 border border-gray-300 rounded-md p-2.5 focus:ring-blue-500 focus:border-blue-500 shadow-sm" placeholder="Digite o nome do aluno para filtrar a turma atual..." />
+                        <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3"><i class="fas fa-search text-gray-400"></i></div>
+                        <input type="text" id="searchInput" class="block w-full rounded-md border border-gray-300 p-2.5 pl-10 shadow-sm focus:border-blue-500 focus:ring-blue-500" placeholder="Digite o nome do aluno para filtrar a turma atual..." />
                     </div>
                 </div>
             </div>
 
-            <div id="statsContainer" class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6 hidden">
-                <div class="bg-blue-50 border border-blue-100 rounded-lg p-4 flex items-center justify-between">
-                    <div>
-                        <p class="text-sm text-blue-800 font-bold">Total de Estudantes</p>
-                        <p id="totalAlunos" class="text-3xl font-black text-blue-900">0</p>
-                    </div>
-                    <div class="bg-blue-200 text-blue-800 rounded-full w-12 h-12 flex items-center justify-center text-xl shadow-inner"><i class="fas fa-users"></i></div>
+            <div id="statsContainer" class="mb-6 grid hidden grid-cols-1 gap-4 md:grid-cols-3">
+                <div class="flex items-center justify-between rounded-lg border border-blue-100 bg-blue-50 p-4">
+                    <div><p class="text-sm font-bold text-blue-800">Total de Estudantes</p><p id="totalAlunos" class="text-3xl font-black text-blue-900">0</p></div>
+                    <div class="flex h-12 w-12 items-center justify-center rounded-full bg-blue-200 text-xl text-blue-800 shadow-inner"><i class="fas fa-users"></i></div>
                 </div>
-
-                <div class="bg-red-50 border border-red-100 rounded-lg p-4 flex items-center justify-between">
-                    <div>
-                        <p class="text-sm text-red-800 font-bold">Faltas Acumuladas</p>
-                        <p id="totalFaltas" class="text-3xl font-black text-red-900">0</p>
-                    </div>
-                    <div class="bg-red-200 text-red-800 rounded-full w-12 h-12 flex items-center justify-center text-xl shadow-inner"><i class="fas fa-calendar-times"></i></div>
+                <div class="flex items-center justify-between rounded-lg border border-red-100 bg-red-50 p-4">
+                    <div><p class="text-sm font-bold text-red-800">Faltas Acumuladas</p><p id="totalFaltas" class="text-3xl font-black text-red-900">0</p></div>
+                    <div class="flex h-12 w-12 items-center justify-center rounded-full bg-red-200 text-xl text-red-800 shadow-inner"><i class="fas fa-calendar-times"></i></div>
                 </div>
-
-                <div class="bg-yellow-50 border border-yellow-100 rounded-lg p-4 flex items-center justify-between">
-                    <div>
-                        <p class="text-sm text-yellow-800 font-bold">Média de Faltas/Aluno</p>
-                        <p id="mediaFaltas" class="text-3xl font-black text-yellow-900">0</p>
-                    </div>
-                    <div class="bg-yellow-200 text-yellow-800 rounded-full w-12 h-12 flex items-center justify-center text-xl shadow-inner"><i class="fas fa-chart-bar"></i></div>
+                <div class="flex items-center justify-between rounded-lg border border-yellow-100 bg-yellow-50 p-4">
+                    <div><p class="text-sm font-bold text-yellow-800">Média de Faltas/Aluno</p><p id="mediaFaltas" class="text-3xl font-black text-yellow-900">0</p></div>
+                    <div class="flex h-12 w-12 items-center justify-center rounded-full bg-yellow-200 text-xl text-yellow-800 shadow-inner"><i class="fas fa-chart-bar"></i></div>
                 </div>
             </div>
 
-            <div id="tableContainer" class="overflow-x-auto hidden border border-gray-200 rounded-lg shadow-sm">
+            <div id="tableContainer" class="hidden overflow-x-auto rounded-lg border border-gray-200 shadow-sm">
                 <table class="min-w-full divide-y divide-gray-200">
-                    <thead class="bg-gray-100">
-                        <tr>
-                            <th scope="col" class="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider w-16">#</th>
-                            <th scope="col" class="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">Nome do Estudante (Ordem Alfabética)</th>
-                            <th scope="col" class="px-6 py-4 text-center text-xs font-bold text-gray-600 uppercase tracking-wider w-40">Faltas Totais</th>
-                            <th scope="col" class="px-6 py-4 text-center text-xs font-bold text-gray-600 uppercase tracking-wider w-40">Ação / Risco</th>
-                        </tr>
-                    </thead>
-                    <tbody id="alunosTableBody" class="bg-white divide-y divide-gray-200"></tbody>
+                    <thead class="bg-gray-100"><tr>
+                        <th scope="col" class="w-16 px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-gray-600">#</th>
+                        <th scope="col" class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-gray-600">Nome do Estudante (Ordem Alfabética)</th>
+                        <th scope="col" class="w-40 px-6 py-4 text-center text-xs font-bold uppercase tracking-wider text-gray-600">Faltas Totais</th>
+                        <th scope="col" class="w-40 px-6 py-4 text-center text-xs font-bold uppercase tracking-wider text-gray-600">Ação / Risco</th>
+                    </tr></thead>
+                    <tbody id="alunosTableBody" class="divide-y divide-gray-200 bg-white"></tbody>
                 </table>
-                <div id="noResults" class="text-center py-12 text-gray-500 hidden bg-gray-50">
-                    <i class="fas fa-search-minus text-4xl mb-3 text-gray-300"></i>
-                    <p class="text-lg font-medium">Nenhum estudante encontrado com esse nome nesta turma.</p>
-                </div>
+                <div id="noResults" class="hidden bg-gray-50 py-12 text-center text-gray-500"><i class="fas fa-search-minus mb-3 text-4xl text-gray-300"></i><p class="text-lg font-medium">Nenhum estudante encontrado com esse nome nesta turma.</p></div>
             </div>
 
-            <div id="placeholderState" class="text-center py-20 bg-gray-50 rounded-lg border-2 border-dashed border-gray-300">
-                <i class="fas fa-chalkboard-teacher text-5xl text-gray-300 mb-4"></i>
+            <div id="placeholderState" class="rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 py-20 text-center">
+                <i class="fas fa-chalkboard-teacher mb-4 text-5xl text-gray-300"></i>
                 <h3 class="text-xl font-bold text-gray-700">Selecione uma turma no menu acima</h3>
-                <p class="text-gray-500 mt-2">Os dados detalhados da turma aparecerão aqui com total precisão e segurança.</p>
+                <p class="mt-2 text-gray-500">Os dados detalhados da turma aparecerão aqui com total precisão e segurança.</p>
             </div>
         </div>
 
-        <footer class="text-center text-gray-500 text-sm mt-8 pb-8">
+        <footer class="mt-8 pb-8 text-center text-sm text-gray-500">
             <p class="font-medium">Gestão de Infrequência - EEIEF Antônio Albuquerque de Sousa Filho</p>
             <p class="mt-1">Desenvolvido pelo Prof. Robson Dias | <a href="https://ondasvirtuais.blogspot.com" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">Ondas Virtuais</a></p>
         </footer>
@@ -113,41 +91,28 @@
         <section class="flex max-h-[90vh] w-full max-w-3xl flex-col overflow-hidden rounded-xl bg-white shadow-2xl">
             <header class="flex items-center justify-between gap-4 border-b border-gray-200 bg-blue-800 px-5 py-4 text-white">
                 <h2 id="manualTitle" class="text-xl font-bold"><i class="fas fa-book-open mr-2" aria-hidden="true"></i>Manual de Uso: Painel de Infrequência Escolar</h2>
-                <button type="button" id="closeManual" class="rounded-md p-2 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-white" aria-label="Fechar manual">
-                    <i class="fas fa-times text-xl" aria-hidden="true"></i>
-                </button>
+                <button type="button" id="closeManual" class="rounded-md p-2 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-white" aria-label="Fechar manual"><i class="fas fa-times text-xl" aria-hidden="true"></i></button>
             </header>
             <div class="overflow-y-auto p-5 text-gray-700">
                 <p class="mb-5">Este guia rápido ajuda professores, coordenadores e gestores a utilizar o painel de monitoramento de faltas.</p>
-
                 <h3 class="mb-2 text-lg font-bold text-gray-900">1. Acessar o painel</h3>
                 <p class="mb-5">Acesse o link do blog compartilhado pela coordenação e clique em <strong>“Painel de Infrequência”</strong> no menu para abrir o monitoramento.</p>
-
                 <h3 class="mb-2 text-lg font-bold text-gray-900">2. Conhecer a tela inicial</h3>
                 <p class="mb-5">Use o menu <strong>Selecione a Turma</strong> para escolher a turma que deseja consultar e o campo <strong>Buscar Estudante</strong> para localizar um aluno pelo nome.</p>
-
                 <h3 class="mb-2 text-lg font-bold text-gray-900">3. Consultar os dados da turma</h3>
                 <p class="mb-5">Após selecionar uma turma, o painel apresenta o total de estudantes, as faltas acumuladas e a média de faltas por aluno, além da lista de estudantes.</p>
-
                 <h3 class="mb-2 text-lg font-bold text-gray-900">4. Entender os níveis de risco</h3>
                 <ul class="mb-5 list-disc space-y-1 pl-6">
                     <li><strong class="text-green-700">Baixo (verde):</strong> 0 a 10 faltas.</li>
                     <li><strong class="text-yellow-700">Alerta (amarelo):</strong> 11 a 20 faltas; o aluno precisa de atenção e a família deve ser notificada.</li>
                     <li><strong class="text-red-700">Crítico (vermelho):</strong> mais de 20 faltas; requer ação imediata da Busca Ativa.</li>
                 </ul>
-
                 <h3 class="mb-2 text-lg font-bold text-gray-900">5. Buscar um aluno</h3>
                 <p class="mb-5">Selecione primeiro a turma e digite o nome do estudante no campo de busca. A tabela será filtrada automaticamente.</p>
-
                 <h3 class="mb-2 text-lg font-bold text-gray-900">Dicas para a equipe</h3>
-                <ul class="mb-5 list-disc space-y-1 pl-6">
-                    <li>Professores: consultem o painel antes das reuniões com as famílias.</li>
-                    <li>Coordenação: verifiquem semanalmente os casos com nível crítico para acionar a Busca Ativa.</li>
-                </ul>
+                <ul class="mb-5 list-disc space-y-1 pl-6"><li>Professores: consultem o painel antes das reuniões com as famílias.</li><li>Coordenação: verifiquem semanalmente os casos com nível crítico para acionar a Busca Ativa.</li></ul>
                 <p class="mb-5">Em caso de dúvida sobre o funcionamento do painel, procure a coordenação pedagógica.</p>
-                <a href="README.md" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 font-semibold text-blue-700 underline hover:text-blue-900">
-                    <i class="fas fa-up-right-from-square" aria-hidden="true"></i> Abrir o manual completo
-                </a>
+                <a href="README.md" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 font-semibold text-blue-700 underline hover:text-blue-900"><i class="fas fa-up-right-from-square" aria-hidden="true"></i> Abrir o manual completo</a>
             </div>
         </section>
     </div>
@@ -192,87 +157,118 @@
             if (event.key === 'Escape' && !manualDialog.classList.contains('hidden')) fecharManual();
         });
 
+        function converterManualParaDados(texto) {
+            const dados = {};
+            let turmaAtual = '';
+
+            texto.split(/\r?\n/).forEach((linha) => {
+                const cabecalho = linha.match(/^\s*(?:#{1,6}\s*)?📚\s*(.+?)\s*$/u);
+                if (cabecalho) {
+                    turmaAtual = cabecalho[1].trim();
+                    dados[turmaAtual] = [];
+                    return;
+                }
+
+                if (!turmaAtual) return;
+                const estudante = linha.match(/^\s*[-*]\s+(.+?):\s*(\d+)\s+faltas?\b/i);
+                if (estudante) {
+                    dados[turmaAtual].push({ nome: estudante[1].trim(), faltas: Number(estudante[2]) });
+                }
+            });
+
+            return Object.fromEntries(Object.entries(dados).filter(([, alunos]) => alunos.length > 0));
+        }
+
         async function carregarDados() {
             try {
                 const resposta = await fetch('dados.json');
-                if (!resposta.ok) throw new Error('Não foi possível carregar os dados.');
-                dadosInfrequencia = await resposta.json();
+                if (!resposta.ok) throw new Error(`Falha ao buscar dados.json (HTTP ${resposta.status}).`);
 
-                const turmas = Object.keys(dadosInfrequencia).sort();
-                turmas.forEach(turma => {
+                const conteudo = await resposta.text();
+                try {
+                    dadosInfrequencia = JSON.parse(conteudo);
+                } catch {
+                    // Aceita também o formato de manual/lista que está atualmente salvo em dados.json.
+                    dadosInfrequencia = converterManualParaDados(conteudo);
+                }
+
+                const turmas = Object.keys(dadosInfrequencia);
+                if (turmas.length === 0) {
+                    throw new Error('O arquivo foi encontrado, mas não contém dados JSON ou listas de estudantes reconhecíveis.');
+                }
+
+                turmas.sort().forEach((turma) => {
                     const option = document.createElement('option');
                     option.value = turma;
                     option.textContent = `Turma ${turma}`;
                     turmaSelect.appendChild(option);
                 });
             } catch (error) {
-                console.error(error);
+                console.error('Erro ao carregar dados:', error);
                 placeholderState.innerHTML = `
-                    <i class="fas fa-triangle-exclamation text-5xl text-red-400 mb-4"></i>
+                    <i class="fas fa-triangle-exclamation mb-4 text-5xl text-red-400"></i>
                     <h3 class="text-xl font-bold text-gray-700">Não foi possível carregar os dados</h3>
-                    <p class="text-gray-500 mt-2">Verifique se o arquivo <strong>dados.json</strong> existe na raiz do projeto.</p>
+                    <p class="mt-2 text-gray-500">${error.message}</p>
+                    <p class="mt-2 text-gray-500">Se abriu o arquivo diretamente no computador, acesse o painel por um servidor web (por exemplo, GitHub Pages).</p>
                 `;
             }
         }
 
         function renderTable(searchTerm = '') {
             if (!currentTurma) return;
-
             let alunos = dadosInfrequencia[currentTurma] || [];
             if (searchTerm) {
                 const lowerTerm = searchTerm.toLowerCase();
-                alunos = alunos.filter(a => a.nome.toLowerCase().includes(lowerTerm));
+                alunos = alunos.filter((aluno) => aluno.nome.toLowerCase().includes(lowerTerm));
             }
 
             alunosTableBody.innerHTML = '';
             if (alunos.length === 0) {
                 noResults.classList.remove('hidden');
                 document.querySelector('table').classList.add('hidden');
-            } else {
-                noResults.classList.add('hidden');
-                document.querySelector('table').classList.remove('hidden');
-
-                alunos.forEach((aluno, index) => {
-                    const tr = document.createElement('tr');
-                    tr.className = 'hover:bg-blue-50 transition-colors duration-150';
-                    let riscoBadge = '';
-                    let faltasClass = 'font-bold text-lg ';
-
-                    if (aluno.faltas > 20) {
-                        riscoBadge = '<span class="px-3 py-1 inline-flex text-xs leading-5 font-bold rounded-full bg-red-100 text-red-800"><i class="fas fa-exclamation-triangle mr-1 mt-0.5"></i> Crítico</span>';
-                        faltasClass += 'text-red-600';
-                    } else if (aluno.faltas > 10) {
-                        riscoBadge = '<span class="px-3 py-1 inline-flex text-xs leading-5 font-bold rounded-full bg-yellow-100 text-yellow-800"><i class="fas fa-exclamation-circle mr-1 mt-0.5"></i> Alerta</span>';
-                        faltasClass += 'text-yellow-600';
-                    } else {
-                        riscoBadge = '<span class="px-3 py-1 inline-flex text-xs leading-5 font-bold rounded-full bg-green-100 text-green-800"><i class="fas fa-check-circle mr-1 mt-0.5"></i> Baixo</span>';
-                        faltasClass += 'text-green-600';
-                    }
-
-                    tr.innerHTML = `
-                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500">${index + 1}</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-800 capitalize">${aluno.nome}</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-center ${faltasClass}">${aluno.faltas}</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-center">${riscoBadge}</td>
-                    `;
-                    alunosTableBody.appendChild(tr);
-                });
+                return;
             }
+
+            noResults.classList.add('hidden');
+            document.querySelector('table').classList.remove('hidden');
+            alunos.forEach((aluno, index) => {
+                const tr = document.createElement('tr');
+                tr.className = 'transition-colors duration-150 hover:bg-blue-50';
+                let riscoBadge = '';
+                let faltasClass = 'text-lg font-bold ';
+                if (aluno.faltas > 20) {
+                    riscoBadge = '<span class="inline-flex rounded-full bg-red-100 px-3 py-1 text-xs font-bold leading-5 text-red-800"><i class="fas fa-exclamation-triangle mr-1 mt-0.5"></i> Crítico</span>';
+                    faltasClass += 'text-red-600';
+                } else if (aluno.faltas > 10) {
+                    riscoBadge = '<span class="inline-flex rounded-full bg-yellow-100 px-3 py-1 text-xs font-bold leading-5 text-yellow-800"><i class="fas fa-exclamation-circle mr-1 mt-0.5"></i> Alerta</span>';
+                    faltasClass += 'text-yellow-600';
+                } else {
+                    riscoBadge = '<span class="inline-flex rounded-full bg-green-100 px-3 py-1 text-xs font-bold leading-5 text-green-800"><i class="fas fa-check-circle mr-1 mt-0.5"></i> Baixo</span>';
+                    faltasClass += 'text-green-600';
+                }
+
+                tr.innerHTML = `
+                    <td class="whitespace-nowrap px-6 py-4 text-sm font-medium text-gray-500">${index + 1}</td>
+                    <td class="whitespace-nowrap px-6 py-4 text-sm font-bold capitalize text-gray-800">${aluno.nome}</td>
+                    <td class="whitespace-nowrap px-6 py-4 text-center ${faltasClass}">${aluno.faltas}</td>
+                    <td class="whitespace-nowrap px-6 py-4 text-center">${riscoBadge}</td>
+                `;
+                alunosTableBody.appendChild(tr);
+            });
         }
 
         function updateStats() {
             if (!currentTurma) return;
             const alunos = dadosInfrequencia[currentTurma] || [];
             const totalAlunos = alunos.length;
-            const totalFaltas = alunos.reduce((sum, a) => sum + a.faltas, 0);
-            const media = totalAlunos > 0 ? (totalFaltas / totalAlunos).toFixed(1) : 0;
+            const totalFaltas = alunos.reduce((soma, aluno) => soma + aluno.faltas, 0);
             totalAlunosEl.textContent = totalAlunos;
             totalFaltasEl.textContent = totalFaltas;
-            mediaFaltasEl.textContent = media;
+            mediaFaltasEl.textContent = totalAlunos > 0 ? (totalFaltas / totalAlunos).toFixed(1) : 0;
         }
 
-        turmaSelect.addEventListener('change', (e) => {
-            currentTurma = e.target.value;
+        turmaSelect.addEventListener('change', (event) => {
+            currentTurma = event.target.value;
             searchInput.value = '';
             if (currentTurma) {
                 placeholderState.classList.add('hidden');
@@ -287,8 +283,8 @@
             }
         });
 
-        searchInput.addEventListener('input', (e) => {
-            if (currentTurma) renderTable(e.target.value);
+        searchInput.addEventListener('input', (event) => {
+            if (currentTurma) renderTable(event.target.value);
         });
 
         carregarDados();
